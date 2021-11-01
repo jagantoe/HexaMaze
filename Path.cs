@@ -1,17 +1,18 @@
 ﻿public class Path
 {
-    public List<MazeTile> Tiles { get; set; } = new List<MazeTile>();
+    public HashSet<MazeTile> Tiles { get; set; }
     public bool Ended = false;
     public bool ReachedEnd = false;
     public int Length = 0;
 
-    public Path()
+    public Path(MazeTile tile)
     {
-
+        Tiles = new HashSet<MazeTile>();
+        Tiles.Add(tile);
     }
     public Path(Path path, MazeTile tile)
     {
-        Tiles.AddRange(path.Tiles);
+        Tiles = new HashSet<MazeTile>(path.Tiles);
         Tiles.Add(tile);
     }
 
@@ -27,10 +28,6 @@
 
     public void AddTile(MazeTile tile)
     {
-        if (Tiles.Contains<MazeTile>(tile))
-        {
-            throw new ArgumentException("TILE ALREADY PASSED");
-        }
         Tiles.Add(tile);
     }
 
